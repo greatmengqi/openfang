@@ -155,7 +155,8 @@ document.addEventListener('alpine:init', function() {
 
     async checkAuth() {
       try {
-        await OpenFangAPI.get('/api/providers');
+        // Use an endpoint that requires auth (not in the public whitelist)
+        await OpenFangAPI.get('/api/settings');
         this.showAuthPrompt = false;
       } catch(e) {
         if (e.message && (e.message.indexOf('Not authorized') >= 0 || e.message.indexOf('401') >= 0 || e.message.indexOf('Missing Authorization') >= 0)) {
