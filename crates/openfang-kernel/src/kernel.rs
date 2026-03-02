@@ -4112,11 +4112,13 @@ impl OpenFangKernel {
             {
                 if let Some(ref ctx) = skill.manifest.prompt_context {
                     if !ctx.is_empty() {
-                        let is_bundled = matches!(
+                        let is_trusted = matches!(
                             skill.manifest.source,
                             Some(openfang_skills::SkillSource::Bundled)
+                                | Some(openfang_skills::SkillSource::Native)
+                                | None
                         );
-                        if is_bundled {
+                        if is_trusted {
                             // Bundled skills are trusted (shipped with binary)
                             context_parts.push(format!(
                                 "--- Skill: {} ---\n{ctx}\n--- End Skill ---",
