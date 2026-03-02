@@ -413,9 +413,13 @@ fn append_daily_memory_log(workspace: &Path, response: &str) {
             return;
         }
     }
-    // Truncate long responses for the log
+    // Truncate long responses for the log (char-boundary safe)
     let summary = if trimmed.len() > 500 {
-        &trimmed[..500]
+        let mut end = 500;
+        while !trimmed.is_char_boundary(end) {
+            end -= 1;
+        }
+        &trimmed[..end]
     } else {
         trimmed
     };
