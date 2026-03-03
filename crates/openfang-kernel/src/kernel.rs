@@ -1408,6 +1408,12 @@ impl OpenFangKernel {
                     None
                 },
             };
+            tracing::info!(
+                agent = %prompt_ctx.agent_name,
+                skill_prompt_context_len = prompt_ctx.skill_prompt_context.len(),
+                skill_summary_len = prompt_ctx.skill_summary.len(),
+                "Skill prompt context collected"
+            );
             manifest.model.system_prompt =
                 openfang_runtime::prompt_builder::build_system_prompt(&prompt_ctx);
         }
