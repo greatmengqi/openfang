@@ -237,7 +237,7 @@ pub fn convert_skillmd(dir: &Path) -> Result<ConvertedSkillMd, SkillError> {
             description: frontmatter.description.clone(),
             author: String::new(),
             license: String::new(),
-            tags: vec!["openclaw-compat".to_string(), "prompt-only".to_string()],
+            tags: vec!["skillmd".to_string(), "prompt-only".to_string()],
         },
         runtime: SkillRuntimeConfig {
             runtime_type,
@@ -246,7 +246,7 @@ pub fn convert_skillmd(dir: &Path) -> Result<ConvertedSkillMd, SkillError> {
         tools: SkillTools { provided: tools },
         requirements: SkillRequirements::default(),
         prompt_context: Some(body.clone()),
-        source: Some(SkillSource::OpenClaw),
+        source: Some(SkillSource::Native),
     };
 
     info!(
